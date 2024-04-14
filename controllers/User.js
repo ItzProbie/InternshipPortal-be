@@ -40,3 +40,45 @@ exports.getUser = async(req,res) => {
     }
 
 }
+
+//auth isAdmin
+exports.deleteUser = async(req,res) => {
+
+    try{
+
+        const {mail} = req.body;
+
+        if(!mail){
+            return res.status(400).json({
+                success : false,
+                message : "Missing user"
+            });
+        }
+
+        const user = await User.findOne({email : mail});
+
+        if(!user){
+            return res.status(404).json({
+                success : false,
+                message : "Invalid User"
+            });
+        }
+
+        await User.findByIdAndDelete(user._id);
+
+        return res.status(200).json({
+            success : true,
+            message : "user deleted successfully"
+        });
+
+    }catch(err){
+
+        console.log(err);
+        return res.status(500).json({
+            success : false,
+            message : "Something went wrong , plz try again later"
+        });
+
+    }
+
+}
