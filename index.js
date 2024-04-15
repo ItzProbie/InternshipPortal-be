@@ -1,13 +1,20 @@
 const express = require("express");
 const app = express();
 const cors = require('cors');
+const fileupload = require("express-fileupload");
 require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
+app.use(fileupload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
 
 const database = require("./config/database");
+const cloudinary = require("./config/cloudinary");
 database.connect();
+cloudinary.cloudinaryConnect();
 
 const auth = require("./routes/Auth");
 const domain = require("./routes/Domain");
