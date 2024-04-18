@@ -197,7 +197,7 @@ exports.login = async(req,res) => {
             });
         }
 
-        if(bcrypt.compare(password , user.password)){
+        if(await bcrypt.compare(password , user.password)){
 
             const payload = {
                 email : user.email,
