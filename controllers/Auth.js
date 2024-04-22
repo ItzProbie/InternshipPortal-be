@@ -100,7 +100,7 @@ exports.signUp = async(req,res) => {
             });
 
         }
-        else if(otp !== otpDB[0].otp){
+        else if(parseInt(otp) !== parseInt(otpDB[0].otp)){
 
             return res.status(400).json({
                 success : false,
