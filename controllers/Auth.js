@@ -215,6 +215,7 @@ exports.login = async(req,res) => {
                 name : user.name , 
                 dp : user.image , 
                 role : user.role ,
+                id : user.id,
                 message : "Logged in successfully"
             });
 
